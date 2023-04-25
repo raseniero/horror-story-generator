@@ -27,19 +27,24 @@ export default function Home() {
         }),
       });
       
-      const data = await response.json();
       if (response.status !== 200) {
-        throw data.error || new Error(`Request failed with status ${response.status}`);
+        throw new Error(`Request failed with status ${response.status}`);
       }
       
+      const data = await response.json();
+      
       console.debug("data.result=" + data.result);
+      
       setResult(data.result);
     } catch(error) {
       // Consider implementing your own error handling logic here
+      
       console.error(error);
+      
       alert(error.message);
     }
   }
+  
   return (
     <div>
       <Head>
@@ -57,8 +62,8 @@ export default function Home() {
             name="system"
             placeholder="Enter System"
             value={systemInput}
-            rows="18"
-            cols="20"
+            rows={18}
+            cols={20}
             onChange={(e) => setSystemInput(e.target.value)}
           />
           
@@ -67,8 +72,8 @@ export default function Home() {
             name="user"
             placeholder="User Input"
             value={userInput}
-            rows="13"
-            cols="20"
+            rows={13}
+            cols={20}
             onChange={(e) => setUserInput(e.target.value)}
           />
           <input
@@ -87,8 +92,8 @@ export default function Home() {
               name="result"
               placeholder=""
               value={result}
-              rows="18"
-              cols="20"
+              rows={18}
+              cols={20}
             />
           </form>
         </div>
